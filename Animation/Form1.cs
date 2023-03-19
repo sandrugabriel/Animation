@@ -15,6 +15,9 @@ namespace Animation
     {
 
         private Timer timer;
+        private PictureBox pctCars;
+        private PictureBox pctBike;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,9 +27,32 @@ namespace Animation
 
             timer.Enabled = true;
 
+            //Car
 
+            pctCars = new PictureBox();
+            this.Controls.Add(pctCars);
 
+            this.pctCars.Location = new Point(27, 97);
+            this.pctCars.Size = new Size(100, 70);
+            this.pctCars.BackColor = Color.Red;
 
+            string path = Application.StartupPath + @"/images/" + "car.png";
+
+            this.pctCars.Image = Image.FromFile(path);
+            this.pctCars.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pctCars.BackColor = SystemColors.Window;
+
+            //Bike
+            pctBike = new PictureBox();
+            this.Controls.Add(pctBike);
+
+            this.pctBike.Location = new Point(41, 254);
+            this.pctBike.Size = new Size(100, 70);
+
+            string path1 = Application.StartupPath + @"/images/bike.jpg";
+
+            this.pctBike.Image = Image.FromFile(path1);
+            this.pctBike.SizeMode = PictureBoxSizeMode.StretchImage;
 
         }
 
@@ -35,13 +61,18 @@ namespace Animation
 
 
 
-            btnTest.Left += 40;
+            pctCars.Left += 40;
+            pctBike.Left += 35;
 
-            int lung = this.Width - 20;
-
-            if(btnTest.Location.X >= lung)
-            {
-                btnTest.Location = new Point(-38, 80);
+            int lung = this.Width - 135;
+            
+            if(pctCars.Location.X >= lung)
+            {   
+                timer.Enabled = false;
+                MessageBox.Show("The car won","Car",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                pctCars.Location = new Point(20, 97);
+                pctBike.Location = new Point(20,254);
+                
             }
            
 
