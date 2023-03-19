@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Animation.Panels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,9 +16,9 @@ namespace Animation
     public partial class Form1 : Form
     {
 
-        private Timer timer;
-        private PictureBox pctCars;
-        private PictureBox pctBike;
+        public Timer timer;
+        public PictureBox pctCars;
+        public PictureBox pctBike;
 
         public Form1()
         {
@@ -25,7 +27,7 @@ namespace Animation
             timer = new Timer();
             timer.Tick += new EventHandler(timer_Tick);
 
-            timer.Enabled = true;
+            timer.Enabled = false;
 
             //Car
 
@@ -35,6 +37,11 @@ namespace Animation
             this.pctCars.Location = new Point(27, 97);
             this.pctCars.Size = new Size(100, 70);
             this.pctCars.BackColor = Color.Red;
+
+            string p = Application.StartupPath + @"/images/road.png";
+
+            this.BackgroundImage = Image.FromFile(p);
+            this.BackgroundImageLayout = ImageLayout.Stretch;
 
             string path = Application.StartupPath + @"/images/" + "car.png";
 
@@ -53,6 +60,8 @@ namespace Animation
 
             this.pctBike.Image = Image.FromFile(path1);
             this.pctBike.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            this.Controls.Add(new pnlBtn(this));
 
         }
 
